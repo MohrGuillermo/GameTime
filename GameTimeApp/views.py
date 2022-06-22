@@ -1,10 +1,13 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import render
 from django.shortcuts import render 
 from django.urls import reverse_lazy 
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate
-from .models import Faq, Event, Game, User
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from GameTimeApp.forms import UserRegistrationForm, UserEditForm
+from GameTimeApp.models import Faq, Event, Game, Contact
 
 
 
@@ -15,28 +18,37 @@ def index(request):
 def us(request):
     return render(request, 'us.html')
 
-def contact(request):
-    return render(request, 'contact.html')
+class Contact(CreateView):
+    model = Contact
+    fields = ['nombre', 'email', 'mensaje']
+    template_name = 'contact.html'
+    success_url = reverse_lazy('index.html')
 
 
 def galery(request):
     return render(request, 'galery.html')
-    
-def login(request):
-    return render(request, 'login.html')
 
+def profile_edit(request):
+    usuario = request.User
+    if request.method == 'POST':
+        miFormulario = UserEditForm(request.POST)
+        if miFormulario.is_valid:
+            info = miFormulario.cleaned_data
+            usuario.mail = info['email']
+            usuario.password = info['password']
+            usuario.password_2 = info['password_2']
+            usuario.save()
+        context = {f'mensaje':'Usuario: {usuario.nombre} editado con éxito'} 
+        return render(request, 'index.html', context)
+    else:
+        miFormulario = UserEditForm(initial = {'email':usuario.email})
+        context = {f'mensaje':'Usuario: {usuario.nombre} editado con éxito'}
+    return render(request, 'profile_edit.html', {'miFormulario':miFormulario, 'usuario': usuario})
 
-def register(request):
-    return render(request, 'register.html') 
-
-
-def profile(request):
-    return render(request, 'profile.html')
-
-
+#Formulario de registro heredado de .forms que a su vez heredó a la clase de django 'UserCreationForm' y la modificó.
 def registro(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = UserRegistrationForm(request.POST) #Aca determinamos el uso de 'nuestro' formulario. 
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
@@ -44,8 +56,8 @@ def registro(request):
         else:
             return render(request, 'register.html', {'form': form, 'error': 'El usuario ya existe o los datos ingresados son incorrectos'})
     else:
-        form = UserCreationForm()
-    return render(request, 'registro.html', {'form': form})
+        form = UserRegistrationForm()
+    return render(request, 'register.html', {'form': form})
 
 def login(request):
     if request.method == 'POST':
@@ -57,13 +69,13 @@ def login(request):
             if user is not None:
                 login(request, user)
                 return render(request, 'index.html', {'username': username})
-            else:
-                return render(request, 'login.html', {'form': form, 'error': 'El usuario o la contraseña son incorrectos'})
         else:
             return render(request, 'login.html', {'form': form, 'error': 'Error en la validacion de datos'})
 
+
 def buscarUsuario(request):
     return render(request, 'buscarUsuario.html')
+
 
 def buscarUsuarioResultados(request):
     if request.GET == 'POST':
@@ -78,23 +90,29 @@ def buscarUsuarioResultados(request):
 # Events
 class EventList(ListView):
     model = Event
-    template_name = 'events.html'
+    template_name = 'eventList.html'
+class EventDetail(DetailView):
+    model = Event
+    template_name = 'eventDetail.html'
 class EventCreation(CreateView):
     model = Event
-    fields = ['nombre', 'fecha', 'descripcion']
-    template_name = 'event_form.html'
-    success_url = reverse_lazy('event_list')
+    fields = ['nombre', 'fecha', 'ubicacion', 'descripcion']
+    template_name = 'eventForm.html'
+    success_url = reverse_lazy('eventList.html')
 class EventUpdate(UpdateView):
     model = Event
     fields = ['nombre', 'fecha', 'descripcion']
-    template_name = 'event_form.html'
-    success_url = reverse_lazy('event_list')
+    template_name = 'eventForm.html'
+    success_url = reverse_lazy('eventList.html')
+
 class EventDelete(DeleteView):
     model = Event
-    template_name = 'event_delete.html'
-    success_url = reverse_lazy('event_list')
+    template_name = 'eventDelete.html'
+    success_url = reverse_lazy('eventList.html')
+
 def buscarEvento(request):
     return render(request, 'buscarEvento.html')
+
 def buscarEventoResultados(request):
     if request.GET == 'POST':
         fecha = request.POST['fecha']
@@ -106,21 +124,26 @@ def buscarEventoResultados(request):
 #FAQ
 class FaqList(ListView):
     model = Faq
-    template_name = 'faqlist.html'
+    template_name = 'faqList.html'
+class FaqDetail(DetailView):
+    model = Faq
+    template_name = 'FaqDetail.html'
 class FaqCreation(CreateView):
     model = Faq
-    fields = ['pregunta', 'respuesta']
-    template_name = 'faq_form.html'
-    success_url = reverse_lazy('faq_list')
-class FaqUpdate(UpdateView):
+    fields = ['pregunta']
+    template_name = 'faqForm.html'
+    success_url = reverse_lazy('faqList.html')
+
+class FaqAnswer(UpdateView):
     model = Faq
     fields = ['pregunta', 'respuesta']
-    template_name = 'faq_form.html'
-    success_url = reverse_lazy('faq_list')
+    template_name = 'faqForm.html'
+    success_url = reverse_lazy('faqList.html')
+
 class FaqDelete(DeleteView):
     model = Faq
-    template_name = 'faq_delete.html'
-    success_url = reverse_lazy('faq_list')
+    template_name = 'faqDelete.html'
+    success_url = reverse_lazy('faqList.html')
 def buscarFaq(request):
     return render(request, 'buscarFaq.html')
 def buscarFaqResultados(request):
@@ -132,26 +155,27 @@ def buscarFaqResultados(request):
         else:
             return render(request, 'buscarFaqResultados.html', {'error': 'No hay preguntas que coinicidan con esa palabra clave'})
 
-
+#games
 class GameList(ListView):
     model = Game
-    template_name = 'games.html'
+    template_name = 'gameList.html'
+class GameDetail(DetailView):
+    model = Game
+    template_name = 'gameDetail.html'
+
 class GameCreation(CreateView):
     model = Game
     fields = ['nombre', 'descripcion']
-    template_name = 'game_form.html'
-    success_url = reverse_lazy('game_list')
+    template_name = 'gameForm.html'
+    success_url = reverse_lazy('gameList.html')
+
 class GameUpdate(UpdateView):
     model = Game
     fields = ['nombre', 'descripcion']
-    template_name = 'game_form.html'
-    success_url = reverse_lazy('game_list')
+    template_name = 'gameForm.html'
+    success_url = reverse_lazy('gameList.html')
+
 class GameDelete(DeleteView):
     model = Game
-    template_name = 'game_delete.html'
-    success_url = reverse_lazy('game_list')
-
-
-
-
-
+    template_name = 'gameDelete.html'
+    success_url = reverse_lazy('gameList.html')

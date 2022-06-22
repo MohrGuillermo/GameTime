@@ -1,0 +1,13 @@
+<h1>Editar perfil</h1>
+
+<div>
+    <h1>
+        Editar perfil del usuario: <br>{{usuario}
+    </h1>
+        <form action="" method="POST">{{% csrf_token %}}
+            <table>
+                {{ miFormulario.as_table }}
+            </table>
+            <input type="submit", value="Editar perfil">
+        </form>
+</div>

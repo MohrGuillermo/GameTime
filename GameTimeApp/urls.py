@@ -1,26 +1,29 @@
 
 from django.urls import path
-# Vistas generales
-from .views import  index, us, login, registro, login, buscarUsuario, buscarUsuarioResultados
-from django.contrib.auth.views import LogoutView
-# Vistas eventos
-from .views import EventList, EventCreation, EventUpdate, EventDelete, EventList, EventCreation, EventUpdate, EventDelete, buscarEvento, buscarEventoResultados
-# Vistas juegos
-from .views import GameList, GameCreation, GameUpdate, GameDelete, GameList, GameCreation, GameUpdate, GameDelete
-# Vistas FAq
-from .views import FaqList, FaqCreation, FaqUpdate, FaqDelete, FaqList, FaqCreation, FaqUpdate, FaqDelete, buscarFaq, buscarFaqResultados
 
+# Vistas generales
+from GameTimeApp.views import index, us, login, registro, buscarUsuario, buscarUsuarioResultados, Contact
+from django.contrib.auth.views import LogoutView
+from GameTimeApp.views import profile_edit
+# Vistas eventos
+from GameTimeApp.views import EventList, EventCreation, EventUpdate, EventDelete, EventList, EventCreation, EventUpdate, EventDelete, buscarEvento, buscarEventoResultados, EventDetail
+# Vistas juegos
+from GameTimeApp.views import GameList, GameCreation, GameUpdate, GameDelete, GameList, GameCreation, GameUpdate, GameDelete
+# Vistas FAq
+from GameTimeApp.views import FaqList, FaqCreation, FaqAnswer, FaqDelete, buscarFaq, buscarFaqResultados, FaqDetail
 
 urlpatterns = [
     # Paths generales
     path('index/', index, name='index'),
     path('us/', us, name='us'),
+    path('contacto/', Contact.as_view(), name='contacto'),
     # Paths de logueo    
     path('registro/', registro, name='registro'),
     path('login/', login, name='login'),
     path('logout/', LogoutView.as_view(template_name='GameTimeApp/logout.html'), name='logout'),
     path('buscarUsuario/', buscarUsuario, name='buscarUsuario'),
     path('buscarUsuarioResultados', buscarUsuarioResultados, name='buscarUsuarioResultados'),
+    path('editarPerfil/', profile_edit, name='editarPerfil'),
     #EVENTS
     path('events/create/', EventCreation.as_view(), name='events_create'),
     path('events/update/<pk>/', EventUpdate.as_view(), name='events_update'),
@@ -28,6 +31,10 @@ urlpatterns = [
     path('events/', EventList.as_view(), name='eventos'),
     path('events/buscar/', buscarEvento, name='buscar_eventos'),
     path('events/buscar/resultados', buscarEventoResultados, name='buscar_eventos_resultados'),
+    path('eventDetail', EventDetail.as_view(), name= 'EventDetail'),
+    path('faqDetail', FaqDetail.as_view(), name= 'faqDetail'),
+    path('eventDetail', EventDetail.as_view(), name= 'EventDetail'),
+    path('eventDetail', EventDetail.as_view(), name= 'EventDetail'),
     #GAMES
     path('games/create/', GameCreation.as_view(), name='games_create'),
     path('games/update/<pk>/', GameUpdate.as_view(), name='games_update'),
@@ -35,7 +42,7 @@ urlpatterns = [
     path('games/', GameList.as_view(), name='games'),
     #FAq'S
     path('faq/create/', FaqCreation.as_view(), name='faq_create'),
-    path('faq/update/<pk>/', FaqUpdate.as_view(), name='faq_update'),
+    path('faq/update/<pk>/', FaqAnswer.as_view(), name='faq_update'),
     path('faq/delete/<pk>/', FaqDelete.as_view(), name='faq_delete'),
     path('faq/', FaqList.as_view(), name='faq'),
     path('faq/buscar/', buscarFaq, name='buscar_faq'),
