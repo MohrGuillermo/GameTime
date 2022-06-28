@@ -14,7 +14,7 @@ from GameTimeApp.views import FaqList, FaqCreation, FaqAnswer, FaqDelete, buscar
 
 urlpatterns = [
     # Paths generales
-    path('index/', index, name='index'),
+    path('', index, name='index'),
     path('us/', us, name='us'),
     path('contacto/', Contact.as_view(), name='contacto'),
     # Paths de logueo    
@@ -32,7 +32,7 @@ urlpatterns = [
     path('events/buscar/', buscarEvento, name='buscar_eventos'),
     path('events/buscar/resultados', buscarEventoResultados, name='buscar_eventos_resultados'),
     path('eventDetail', EventDetail.as_view(), name= 'EventDetail'),
-    path('faqDetail', FaqDetail.as_view(), name= 'faqDetail'),
+    
     path('eventDetail', EventDetail.as_view(), name= 'EventDetail'),
     path('eventDetail', EventDetail.as_view(), name= 'EventDetail'),
     #GAMES
@@ -41,10 +41,10 @@ urlpatterns = [
     path('games/delete/<pk>/', GameDelete.as_view(), name='games_delete'),
     path('games/', GameList.as_view(), name='games'),
     #FAq'S
+    path('faqList', FaqList.as_view(), name= 'faqList'),
     path('faq/create/', FaqCreation.as_view(), name='faq_create'),
     path('faq/update/<pk>/', FaqAnswer.as_view(), name='faq_update'),
     path('faq/delete/<pk>/', FaqDelete.as_view(), name='faq_delete'),
-    path('faq/', FaqList.as_view(), name='faq'),
     path('faq/buscar/', buscarFaq, name='buscar_faq'),
     path('faq/buscar/resultados', buscarFaqResultados, name='buscar_faq_resultados'),
     

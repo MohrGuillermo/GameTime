@@ -1,1 +1,22 @@
-<h1>Preguntas frecuentes</h1>
+{% extends "GameTimeApp/padre.html" %}
+{% load static %}
+
+{% block title %}
+<title>F.A.Q'S</title>
+{% endblock %}
+
+{% block tituloheader %}
+                    <h1 class="display-4 fw-bolder">Game Time</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">Preguntas frecuentes</p>
+{% endblock %}
+{% block productos %}
+<br>
+<h3 class="font">Preguntas frecuentes de los usuarios:</h3>
+<br><br>
+<h5 class="font">{% for estudiante in object_list %} <!-- object_list es una lista de estudiantes -->
+<li>{{estudiante}}</li>
+</h5>
+
+
+<h5 class="font">Es una empresa Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt placeat ipsum facilis pariatur quaerat, debitis repudiandae similique in illo recusandae quam? Ea quaerat sit dolore ducimus, voluptatem quos officiis corrupti. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore nulla excepturi perferendis sequi, fuga voluptas ad ex cum aliquam illum eaque sapiente quasi iure vel at dolore quam veritatis itaque. Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni tempora inventore, dolor in unde ad asperiores consequatur reprehenderit quasi sint repudiandae delectus, amet, quo laudantium maiores ratione voluptatibus rem perspiciatis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur adipisci deleniti voluptate accusamus, optio dolore dicta? Numquam facilis quo beatae ullam dicta autem? Vitae, earum perspiciatis suscipit in iure veniam.</h5><br><br>   
+{% endblock %}
