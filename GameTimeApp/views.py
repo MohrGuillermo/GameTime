@@ -151,44 +151,11 @@ class FaqDelete(DeleteView):
     template_name = 'GameTimeApp/faqDelete.html'
     success_url = reverse_lazy('GameTimeApp/faqList.html')
     
-# def buscarFaqResultados(request):
-#     if request.GET.get("buscar"):
-#         objetos = Faq.objects.filter(pregunta=palabra)
-        
-        
-        # else:
-    #     resultado = f'No hay coincidencias con la palabra: {palabra}'
-
-
-    #  if request.GET == 'POST':
-    #     palabra = request.POST['palabra']
-    #     pregunta = Faq.objects.all().filter(palabra=palabra)
-    #     if pregunta is not None:
-    #             return render(request, 'GameTimeApp/buscarFaqResultados.html', {'palabra': palabra, 'pregunta': pregunta})
-    #     else:
-    #         return render(request, 'GameTimeApp/buscarFaqResultados.html', {'error': 'No hay preguntas que coinicidan con esa palabra clave'})
 
 #games
-class GameList(ListView):
-    model = Game
-    template_name = 'GameTimeApp/gameList.html'
-class GameDetail(DetailView):
-    model = Game
-    template_name = 'GameTimeApp/gameDetail.html'
-
-class GameCreation(CreateView):
-    model = Game
-    fields = ['nombre', 'descripcion']
-    template_name = 'GameTimeApp/gameForm.html'
-    success_url = reverse_lazy('GameTimeApp/gameList.html')
-
-class GameUpdate(UpdateView):
-    model = Game
-    fields = ['nombre', 'descripcion']
-    template_name = 'GameTimeApp/gameForm.html'
-    success_url = reverse_lazy('GameTimeApp/gameList.html')
-
-class GameDelete(DeleteView):
-    model = Game
-    template_name = 'GameTimeApp/gameDelete.html'
-    success_url = reverse_lazy('GameTimeApp/gameList.html')
+def toro(request):
+    return render (request, 'GameTimeApp/toro.html')
+def reloj(request):
+    return render(request, 'GameTimeApp/reloj.html')
+def inflables(request):
+    return render(request, 'GameTimeApp/inflables.html')

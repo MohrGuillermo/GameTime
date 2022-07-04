@@ -8,7 +8,7 @@ from GameTimeApp.views import profile_edit
 # Vistas eventos
 from GameTimeApp.views import EventList, EventCreation, EventUpdate, EventDelete, EventList, EventCreation, EventUpdate, EventDelete, buscarEvento, buscarEventoResultados, EventDetail
 # Vistas juegos
-from GameTimeApp.views import GameList, GameCreation, GameUpdate, GameDelete, GameList, GameCreation, GameUpdate, GameDelete
+from GameTimeApp.views import toro, reloj, inflables
 # Vistas FAq
 from GameTimeApp.views import FaqList, FaqCreation, FaqAnswer, FaqDelete
 
@@ -36,10 +36,9 @@ urlpatterns = [
     path('eventDetail', EventDetail.as_view(), name= 'EventDetail'),
     path('eventDetail', EventDetail.as_view(), name= 'EventDetail'),
     #GAMES
-    path('games/create/', GameCreation.as_view(), name='games_create'),
-    path('games/update/<pk>/', GameUpdate.as_view(), name='games_update'),
-    path('games/delete/<pk>/', GameDelete.as_view(), name='games_delete'),
-    path('games/', GameList.as_view(), name='games'),
+    path('toro/', toro, name="toro"),
+    path('reloj/', reloj, name="reloj"),
+    path('inflables/', inflables, name="inflables"),
     #FAq'S
     path('faqList/', FaqList.as_view(), name= 'faqList'),
     path('faq/create/', FaqCreation.as_view(), name='faq_create'),

@@ -11,7 +11,7 @@
 {% endblock %}
 {% block productos %}
 <br>
-<center><h3 class="font">Puede realizar sus reservas y consultas en los siguientes canales que dejamos a su disposición:</h3></center>
+<center><h3 class="font">A continuación indiquenos su consulta, o realice una reserva indicando lugar, fecha, y hora del evento requeridas.</h3></center>
 <br><br>
 <form action="{% url 'contacto'%}" method="POST">{% csrf_token %}
     <p>Asunto: <input type="text" name="asunto"></p>
@@ -19,14 +19,17 @@
     <p>Mensaje: <textarea name="mensaje" rows="15" cols="40"></textarea></p>
     <input type="submit" value="Enviar">
 </form>
+<br>
+<center><h3>Siganos en nuestras redes sociales para mas información</h3>
 <h4>
     <ul>
-        <li><a href="https://www.Facebook.com" target="_">Facebook</a><br></li>
-        <li><a href="https://www.Instagram.com" target="_">Instagram</a><br></li>
-        <li><a href="https://www.Youtube.com" target="_">Youtube</a><br></li>
-        <li><a href="https://www.Outlook.com" target="_">E-Mail</a><br></li>
+        <a href="https://www.Facebook.com" target="_">Facebook</a>
+        <a href="https://www.Instagram.com" target="_">Instagram</a>
+        <a href="https://www.Youtube.com" target="_">Youtube</a>
+
         
     </ul>	
 </h4>
+</center>
 <br><br>
 {% endblock %}
