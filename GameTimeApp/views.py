@@ -60,9 +60,9 @@ def registro(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            return render(request, 'GameTimeApp/index.html', {'username': username})
+            return render(request, 'GameTimeApp/register.html', {'mensaje': f'Usuario creado: {username}'})
         else:
-            return render(request, 'GameTimeApp/register.html', {'form': form, 'error': 'El usuario ya existe o los datos ingresados son incorrectos'})
+            return render(request, 'GameTimeApp/register.html', {'form': form, 'mensaje': 'El usuario ya existe o los datos ingresados son incorrectos'})
     else:
         form = UserRegistrationForm()
     return render(request, 'GameTimeApp/register.html', {'form': form})
