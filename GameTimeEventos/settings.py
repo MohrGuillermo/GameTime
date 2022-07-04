@@ -55,7 +55,7 @@ ROOT_URLCONF = 'GameTimeEventos.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [r'C:\Users\mohrg\Desktop\Trabajos Django\GameTime\GameTimeEventos\GameTimeApp\Templates\GameTimeApp'],
+        'DIRS': [r'/home/lozano/Documents/coderHouse/python/GameTime/GameTimeApp/Templates/'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
