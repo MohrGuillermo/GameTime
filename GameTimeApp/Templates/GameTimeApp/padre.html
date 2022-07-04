@@ -24,18 +24,19 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'index' %}">Inicio</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'us'%}">Nosotros</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'faqDetail' %}">Preguntas frecuentes</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'faqList' %}">Preguntas frecuentes</a></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Servicios</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="games/">Nuestros juegos</a></li>
+                                <li><a class="dropdown-item" href="{% url 'games' %}">Nuestros juegos</a></li>
                                 <li><hr class="dropdown-divider" /></li>
                                 <li><a class="dropdown-item" href="detalleToro/">Toro mecánico</a></li>
                                 <li><a class="dropdown-item" href="detalleReloj/">Reloj loco</a></li>
                                 <li><a class="dropdown-item" href="detalleInflables/">Inflables</a></li>
                             </ul>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'contacto' %}">Contacto</a></li>
                         </li>
                     </ul>
                     <form class="d-flex">

@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.shortcuts import render 
 from django.urls import reverse_lazy 
@@ -9,7 +10,8 @@ from django.contrib.auth.decorators import login_required
 from GameTimeApp.forms import UserRegistrationForm, UserEditForm
 from GameTimeApp.models import Faq, Event, Game, Contact
 
-
+from django.core.mail import send_mail
+from django.conf import settings
 
 def index(request):
 
@@ -19,11 +21,16 @@ def index(request):
 def us(request):
     return render(request, 'GameTimeApp/us.html')
 
-class Contact(CreateView):
-    model = Contact
-    fields = ['nombre', 'email', 'mensaje']
-    template_name = 'GameTimeApp/contact.html'
-    success_url = reverse_lazy('GameTimeApp/index.html')
+def contacto(request):
+    if request.method == 'POST':
+        subject = request.POST["asunto"]
+        message= request.POST["mensaje"] + " " + request.POST["email"]
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list = ['gteventos10@gmail.com']
+        send_mail(subject, message, email_from, recipient_list)
+        return render(request, 'GameTimeApp/gracias.html')
+    return render(request, 'GameTimeApp/contact.html')
+
 
 
 def galery(request):
@@ -129,9 +136,9 @@ class FaqList(ListView):
 
 class FaqCreation(CreateView):
     model = Faq
-    fields = ['pregunta']
+    fields = ['pregunta', 'respuesta']
     template_name = 'GameTimeApp/faqForm.html'
-    success_url = reverse_lazy('GameTimeApp/faqList.html')
+    success_url = reverse_lazy('faqList')
 
 class FaqAnswer(UpdateView):
     model = Faq
@@ -144,16 +151,22 @@ class FaqDelete(DeleteView):
     template_name = 'GameTimeApp/faqDelete.html'
     success_url = reverse_lazy('GameTimeApp/faqList.html')
     
-def buscarFaq(request):
-    return render(request, 'GameTimeApp/buscarFaq.html')
-def buscarFaqResultados(request):
-    if request.GET == 'POST':
-        palabra = request.POST['palabra']
-        pregunta = Faq.objects.all().filter(pregunta__contains=palabra)
-        if pregunta is not None:
-                return render(request, 'GameTimeApp/buscarFaqResultados.html', {'palabra': palabra, 'pregunta': pregunta})
-        else:
-            return render(request, 'GameTimeApp/buscarFaqResultados.html', {'error': 'No hay preguntas que coinicidan con esa palabra clave'})
+# def buscarFaqResultados(request):
+#     if request.GET.get("buscar"):
+#         objetos = Faq.objects.filter(pregunta=palabra)
+        
+        
+        # else:
+    #     resultado = f'No hay coincidencias con la palabra: {palabra}'
+
+
+    #  if request.GET == 'POST':
+    #     palabra = request.POST['palabra']
+    #     pregunta = Faq.objects.all().filter(palabra=palabra)
+    #     if pregunta is not None:
+    #             return render(request, 'GameTimeApp/buscarFaqResultados.html', {'palabra': palabra, 'pregunta': pregunta})
+    #     else:
+    #         return render(request, 'GameTimeApp/buscarFaqResultados.html', {'error': 'No hay preguntas que coinicidan con esa palabra clave'})
 
 #games
 class GameList(ListView):

@@ -14,7 +14,9 @@ from django.contrib.auth.models import User
 class Faq(models.Model):
     pregunta = models.CharField(max_length=300)
     respuesta = models.CharField(max_length=300)
-    
+    def __str__(self):
+        return f'{self.pregunta} {self.respuesta}' 
+
 
 class Event(models.Model):
     nombre = models.CharField(max_length=255)

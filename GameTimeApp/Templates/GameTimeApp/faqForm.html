@@ -1,1 +1,24 @@
-<h1>Ingresar pregunta</h1>
+{% extends "GameTimeApp/padre.html" %}
+{% load static %}
+
+{% block title %}
+<title>Game Time Eventos</title>
+{% endblock %}
+
+{% block tituloheader %}
+                    <h1 class="display-4 fw-bolder">Game Time</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">Desarrolladores</p>
+{% endblock %}
+{% block productos %}
+<br>
+<center><h3 class="font">Preguntas frecuentes</h3></center>
+
+<form method="POST">{% csrf_token %}
+    <h1>Crear pregunta</h1>
+    {{ form.as_p }}
+    <input type="submit" value="Enviar">
+</form>
+
+<br><br>
+
+{% endblock %}

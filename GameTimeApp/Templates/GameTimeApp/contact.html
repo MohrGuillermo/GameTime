@@ -1,1 +1,32 @@
-<h1>Contacto</h1>
+{% extends "GameTimeApp/padre.html" %}
+{% load static %}
+
+{% block title %}
+<title>Contacto Game Time</title>
+{% endblock %}
+
+{% block tituloheader %}
+                    <h1 class="display-4 fw-bolder">Game Time</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">Canales de contacto y reservaciones</p>
+{% endblock %}
+{% block productos %}
+<br>
+<center><h3 class="font">Puede realizar sus reservas y consultas en los siguientes canales que dejamos a su disposición:</h3></center>
+<br><br>
+<form action="{% url 'contacto'%}" method="POST">{% csrf_token %}
+    <p>Asunto: <input type="text" name="asunto"></p>
+    <p>Email: <input type="text" name="email"></p>
+    <p>Mensaje: <textarea name="mensaje" rows="15" cols="40"></textarea></p>
+    <input type="submit" value="Enviar">
+</form>
+<h4>
+    <ul>
+        <li><a href="https://www.Facebook.com" target="_">Facebook</a><br></li>
+        <li><a href="https://www.Instagram.com" target="_">Instagram</a><br></li>
+        <li><a href="https://www.Youtube.com" target="_">Youtube</a><br></li>
+        <li><a href="https://www.Outlook.com" target="_">E-Mail</a><br></li>
+        
+    </ul>	
+</h4>
+<br><br>
+{% endblock %}
