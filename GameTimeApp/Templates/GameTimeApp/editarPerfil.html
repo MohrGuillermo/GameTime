@@ -1,13 +1,33 @@
-<h1>Editar perfil</h1>
+{% extends "GameTimeApp/padre.html" %}
+{% load static %}
 
+{% block title %}
+<title>Game Time Eventos</title>
+{% endblock %}
+{% block tituloheader %}
+                    <h1 class="display-4 fw-bolder">Editar perfil</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">Por favor ingrese los nuevos datos del usuario</p>
+{% endblock %}
+{% block productos %}
+<center>
+<br>
+<br>
 <div>
     <h1>
-        Editar perfil del usuario: <br>{{usuario}}
+        Editar perfil del usuario: <b>{{usuario}}</b>
     </h1>
+    <br>
         <form action="{% url 'editarPerfil'%}" method="POST">{% csrf_token %}
             <table>
                 {{formulario.as_table}}
             </table>
+            <br>
             <input type="submit", value="Editar perfil">
         </form>
 </div>
+<br>
+<br>
+<center><button class="btn btn-outline-dark" ><a class="link" href="{% url 'vistaSuperUser' %}">Volver</a></button></center>
+<br>
+</center>
+{% endblock %}

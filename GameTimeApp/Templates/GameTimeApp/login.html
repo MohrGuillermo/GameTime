@@ -1,24 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log In</title>
-    {{mensaje}}
-</head>
-<body>
-    
+{% extends "GameTimeApp/padre.html" %}
+{% load static %}
+
+{% block title %}
+<title>Game Time Eventos</title>
+{% endblock %}
+{% block tituloheader %}
+                    <h1 class="display-4 fw-bolder">Login</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">Por favor ingrese sus datos de usuario</p>
+{% endblock %}
+{% block productos %}
+<br>
+<br>
+<br>
+<center>
 <form action="" method="POST">
 
-{% csrf_token %}
-{{form.as_p}}
+    {% csrf_token %}
+    {{form.as_p}}
+    
+    <button type="submit">Iniciar sesion</button>
+    
+    </form>
+<br>
+<br>
+<br>
+</center>
+{% endblock %}
 
-<button type="submit">Iniciar sesion</button>
-
-</form>
 
 
-
-</body>
-</html>
+    

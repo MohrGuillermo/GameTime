@@ -1,0 +1,24 @@
+{% extends "GameTimeApp/padre.html" %}
+{% load static %}
+
+{% block title %}
+<title>Game Time Eventos</title>
+{% endblock %}
+{% block tituloheader %}
+                    <h1 class="display-4 fw-bolder">Desarrolladores</h1>
+                    <p class="lead fw-normal text-white-50 mb-0"></p>
+{% endblock %}
+{% block productos %}
+<h3>Secciones para desarrolladores</h3><br>
+<ul>
+    <button class="btn btn-outline-dark" ><a class="link" href="{% url 'registro' %}">Registrar un nuevo usuario</a></button><br><br>
+    <button class="btn btn-outline-dark" ><a class="link" href="{% url 'buscarUsuario' %}">Buscar un usuario</a></button><br><br>
+    <button class="btn btn-outline-dark" ><a class="link" href="{% url 'editarPerfil' %}">Editar perfil de usuario</a></button><br><br>
+    <button class="btn btn-outline-dark" ><a class="link" href="{% url 'UsuariosList' %}">Lista de usuarios registrados</a></button><br><br><br>
+    <center>
+        <button class="btn btn-outline-dark" ><a class="link" href="{% url 'login' %}">Login</a></button>
+        <button class="btn btn-outline-dark" ><a class="link" href="{% url 'logout' %}">Logout</a></button><br>    
+    </center>
+
+</ul>
+{% endblock %}

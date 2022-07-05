@@ -1,0 +1,30 @@
+{% extends "GameTimeApp/padre.html" %}
+{% load static %}
+
+{% block title %}
+<title>Game Time Eventos</title>
+{% endblock %}
+{% block tituloheader %}
+                    <h1 class="display-4 fw-bolder">Game Time</h1>
+                    <p class="lead fw-normal text-white-50 mb-0"></p>
+{% endblock %}
+{% block productos %}
+<h3>Listado de usuarios registrados</h3>
+<br>
+<br>
+
+{% for User in usuarios %}
+<ul>
+    <li>
+    <h4>{{User.username}}</h4>
+    </li>
+</ul>
+
+{% endfor %}
+
+<br>
+<br>
+<center><button class="btn btn-outline-dark" ><a class="link" href="{% url 'vistaSuperUser' %}">Volver</a></button></center>
+<br>
+
+{% endblock %}

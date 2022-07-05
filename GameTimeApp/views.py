@@ -1,4 +1,4 @@
-from cmath import inf
+from cmath import inf, log
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.shortcuts import render 
@@ -36,6 +36,13 @@ def contacto(request):
 
 def galery(request):
     return render(request, 'GameTimeApp/galery.html')
+@login_required
+def vistaSuperUser(request):
+    return render(request, 'GameTimeApp/vistaSuperUser.html')
+@login_required
+def UsuariosList(request):
+    usuarios = User.objects.all
+    return render(request, 'GameTimeApp/UsuariosList.html', {'usuarios':usuarios})
 
 @login_required
 def editarPerfil(request):
@@ -76,7 +83,7 @@ def login_request(request):
             user = authenticate(username=usuario, password=contra)
             if user is not None:
                 login(request, user)
-                return render(request, 'GameTimeApp/index.html', {'mensaje': f'Bienvenido : {usuario}'})
+                return render(request, 'GameTimeApp/vistaSuperUser.html', {'mensaje': f'Bienvenido : {usuario}'})
             else:
                 return render(request,"GameTimeApp/login.html", {'mensaje': 'Datos incorrectos'})
         else:
@@ -85,10 +92,12 @@ def login_request(request):
     return render(request,"GameTimeApp/login.html",{'form':form})
 
 
+
+@login_required
 def buscarUsuario(request):
     return render(request, 'GameTimeApp/buscarUsuario.html')
 
-
+@login_required
 def buscarUsuarioResultados(request):
     if request.GET == 'POST':
         nombre = request.POST['nombre']
