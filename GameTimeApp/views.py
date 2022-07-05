@@ -36,15 +36,15 @@ def contacto(request):
 
 def galery(request):
     return render(request, 'GameTimeApp/galery.html')
-@login_required
+@login_required(login_url='http://127.0.0.1:8000/login/')
 def vistaSuperUser(request):
     return render(request, 'GameTimeApp/vistaSuperUser.html')
-@login_required
+@login_required(login_url='http://127.0.0.1:8000/login/')
 def UsuariosList(request):
     usuarios = User.objects.all
     return render(request, 'GameTimeApp/UsuariosList.html', {'usuarios':usuarios})
 
-@login_required
+@login_required(login_url='http://127.0.0.1:8000/login/')
 def editarPerfil(request):
     usuario = request.user
     if request.method == 'POST':
@@ -92,7 +92,7 @@ def login_request(request):
     return render(request,"GameTimeApp/login.html",{'form':form})
 
 
-@login_required
+@login_required(login_url='http://127.0.0.1:8000/login/')
 def buscarUsuario(request): 
     if request.GET['username']:
         username = request.GET['username']
@@ -101,8 +101,6 @@ def buscarUsuario(request):
     else:
         respuesta = 'No hay usuarios con ese nombre'
         return render(request, 'GameTimeApp/buscarUsuario.html', {'respuesta':respuesta})
-
-
 
 #FAQ
 class FaqList(ListView):

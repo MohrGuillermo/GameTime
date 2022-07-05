@@ -112,7 +112,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-LOGIN_URL = 'C:/Users/mohrg/Desktop/CURSO CODER COMPLETO (PYTHON)/Trabajos Django/GameTime/GameTimeApp/Templates/GameTimeApp/login.html'
+LOGIN_URL = '/GameTimeApp/login'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
