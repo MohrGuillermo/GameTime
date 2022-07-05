@@ -4,7 +4,7 @@ from django.urls import path
 # Vistas generales
 from GameTimeApp.views import contacto, index, us, login_request, registro, buscarUsuario, buscarUsuarioResultados
 from django.contrib.auth.views import LogoutView
-from GameTimeApp.views import profile_edit
+from GameTimeApp.views import editarPerfil
 # Vistas eventos
 from GameTimeApp.views import EventList, EventCreation, EventUpdate, EventDelete, EventList, EventCreation, EventUpdate, EventDelete, buscarEvento, buscarEventoResultados, EventDetail
 # Vistas juegos
@@ -23,7 +23,7 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(template_name='GameTimeApp/logout.html'), name='logout'),
     path('buscarUsuario/', buscarUsuario, name='buscarUsuario'),
     path('buscarUsuarioResultados', buscarUsuarioResultados, name='buscarUsuarioResultados'),
-    path('editarPerfil/', profile_edit, name='editarPerfil'),
+    path('editarPerfil/', editarPerfil, name='editarPerfil'),
     #EVENTS
     path('events/create/', EventCreation.as_view(), name='events_create'),
     path('events/update/<pk>/', EventUpdate.as_view(), name='events_update'),

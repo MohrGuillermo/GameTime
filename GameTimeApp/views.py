@@ -1,3 +1,4 @@
+from cmath import inf
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.shortcuts import render 
@@ -36,22 +37,21 @@ def contacto(request):
 def galery(request):
     return render(request, 'GameTimeApp/galery.html')
 
-def profile_edit(request):
-    usuario = request.User
+@login_required
+def editarPerfil(request):
+    usuario = request.user
     if request.method == 'POST':
-        miFormulario = UserEditForm(request.POST)
-        if miFormulario.is_valid:
-            info = miFormulario.cleaned_data
-            usuario.mail = info['email']
-            usuario.password = info['password']
-            usuario.password_2 = info['password_2']
+        formulario = UserEditForm(request.POST, instance=usuario)
+        if formulario.is_valid():
+            informacion = formulario.cleaned_data
+            usuario.email = informacion['email']
+            usuario.password1 = informacion['password1']
+            usuario.password2 = informacion['password2']
             usuario.save()
-        context = {f'mensaje':'Usuario: {usuario.nombre} editado con éxito'} 
-        return render(request, 'GameTimeApp/index.html', context)
+            return render(request, 'GameTimeApp/index.html', {'usuario': usuario, 'mensaje':'Datos cambiados exitosamente '})
     else:
-        miFormulario = UserEditForm(initial = {'email':usuario.email})
-        context = {f'mensaje':'Usuario: {usuario.nombre} editado con éxito'}
-    return render(request, 'GameTimeApp/profile_edit.html', {'miFormulario':miFormulario, 'usuario': usuario})
+            formulario = UserEditForm(instance=usuario)
+    return render(request, 'GameTimeApp/editarPerfil.html', {'formulario': formulario, 'usuario': usuario.username})
 
 #Formulario de registro heredado de .forms que a su vez heredó a la clase de django 'UserCreationForm' y la modificó.
 def registro(request):
