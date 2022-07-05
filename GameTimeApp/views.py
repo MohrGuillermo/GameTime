@@ -92,11 +92,6 @@ def login_request(request):
     return render(request,"GameTimeApp/login.html",{'form':form})
 
 
-
-# @login_required
-# def buscarUsuario(request):
-#     return render(request, 'GameTimeApp/buscarUsuario.html')
-
 @login_required
 def buscarUsuario(request): 
     if request.GET['username']:
@@ -150,17 +145,6 @@ class FaqCreation(CreateView):
     template_name = 'GameTimeApp/faqForm.html'
     success_url = reverse_lazy('faqList')
 
-class FaqAnswer(UpdateView):
-    model = Faq
-    fields = ['pregunta', 'respuesta']
-    template_name = 'GameTimeApp/faqForm.html'
-    success_url = reverse_lazy('GameTimeApp/faqList.html')
-
-class FaqDelete(DeleteView):
-    model = Faq
-    template_name = 'GameTimeApp/faqDelete.html'
-    success_url = reverse_lazy('GameTimeApp/faqList.html')
-    
 
 #games
 def toro(request):
