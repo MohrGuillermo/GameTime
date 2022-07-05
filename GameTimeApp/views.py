@@ -67,18 +67,22 @@ def registro(request):
         form = UserRegistrationForm()
     return render(request, 'GameTimeApp/register.html', {'form': form})
 
-def login(request):
+def login_request(request):
     if request.method == 'POST':
-        form = AuthenticationForm(request.POST)
+        form = AuthenticationForm(request,data = request.POST)
         if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
+            usuario = form.cleaned_data.get('username')
+            contra = form.cleaned_data.get('password')
+            user = authenticate(username=usuario, password=contra)
             if user is not None:
                 login(request, user)
-                return render(request, 'GameTimeApp/index.html', {'username': username})
+                return render(request, 'GameTimeApp/index.html', {'mensaje': f'Bienvenido : {usuario}'})
+            else:
+                return render(request,"GameTimeApp/login.html", {'mensaje': 'Datos incorrectos'})
         else:
-            return render(request, 'GameTimeApp/login.html', {'form': form, 'error': 'Error en la validacion de datos'})
+            return render(request, 'GameTimeApp/login.html', {'form': form, 'mensaje': 'Formulario erroneo'})
+    form = AuthenticationForm()
+    return render(request,"GameTimeApp/login.html",{'form':form})
 
 
 def buscarUsuario(request):

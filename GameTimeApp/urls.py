@@ -2,7 +2,7 @@
 from django.urls import path
 
 # Vistas generales
-from GameTimeApp.views import contacto, index, us, login, registro, buscarUsuario, buscarUsuarioResultados
+from GameTimeApp.views import contacto, index, us, login_request, registro, buscarUsuario, buscarUsuarioResultados
 from django.contrib.auth.views import LogoutView
 from GameTimeApp.views import profile_edit
 # Vistas eventos
@@ -19,7 +19,7 @@ urlpatterns = [
     path('contacto/', contacto, name='contacto'),
     # Paths de logueo    
     path('registro/', registro, name='registro'),
-    path('login/', login, name='login'),
+    path('login/', login_request, name='login'),
     path('logout/', LogoutView.as_view(template_name='GameTimeApp/logout.html'), name='logout'),
     path('buscarUsuario/', buscarUsuario, name='buscarUsuario'),
     path('buscarUsuarioResultados', buscarUsuarioResultados, name='buscarUsuarioResultados'),
