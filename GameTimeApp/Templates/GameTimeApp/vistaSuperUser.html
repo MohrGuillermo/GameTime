@@ -9,10 +9,21 @@
                     <p class="lead fw-normal text-white-50 mb-0"></p>
 {% endblock %}
 {% block productos %}
-<h3>Secciones para desarrolladores</h3><br>
+<center>
+    <br>
+    <h3>Secciones para desarrolladores</h3>
+</center>
+<br><br>
+<h2>Buscar un usuario</h2>
+<br>
+<form action="{% url 'buscarUsuario' %}" method="GET">
+    <input type="text" name="username" placeholder="Nombre del usuario" id="username">
+    <input type="submit" value="Buscar">
+</form>
+<br><br>
 <ul>
     <button class="btn btn-outline-dark" ><a class="link" href="{% url 'registro' %}">Registrar un nuevo usuario</a></button><br><br>
-    <button class="btn btn-outline-dark" ><a class="link" href="{% url 'buscarUsuario' %}">Buscar un usuario</a></button><br><br>
+    
     <button class="btn btn-outline-dark" ><a class="link" href="{% url 'editarPerfil' %}">Editar perfil de usuario</a></button><br><br>
     <button class="btn btn-outline-dark" ><a class="link" href="{% url 'UsuariosList' %}">Lista de usuarios registrados</a></button><br><br><br>
     <center>

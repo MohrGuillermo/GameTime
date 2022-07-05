@@ -24,8 +24,6 @@ class Event(models.Model):
     fecha = models.DateTimeField()
     descripcion = models.TextField()
     ubicacion = models.CharField(max_length=255)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
     def __str__(self):
         return f'Nombre completo: {self.nombre, self.apellido}, - Fecha: {self.fecha}, - Ubicacion: {self.ubicacion}'
 

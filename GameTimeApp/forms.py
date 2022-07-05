@@ -33,6 +33,12 @@ class loginForm(forms.Form):
 
 
 
+class EventCreation(forms.Form):
+    nombre = forms.CharField(max_length=255)
+    apellido = forms.CharField(max_length=255)
+    fecha = forms.DateTimeField()
+    descripcion = forms.CharField()
+    ubicacion = forms.CharField(max_length=255)
 
 # class UserEvent(forms.Form):
 #     nombre = forms.CharField(max_length=255)

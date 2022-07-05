@@ -1,1 +1,45 @@
-<h1>Buscar usuario</h1>
+{% extends "GameTimeApp/padre.html" %}
+{% load static %}
+
+{% block title %}
+<title>Game Time Eventos</title>
+{% endblock %}
+{% block tituloheader %}
+                    <h1 class="display-4 fw-bolder">Busqueda de usuarios</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">{{username}}</p>
+{% endblock %}
+{% block productos %}
+
+
+    <br><br>
+{% if usuarios %}
+<h2>Estos son los resultados de su busqueda:</h2>
+<br><br>
+<ul>    
+{% for User in usuarios %}
+
+<li>
+
+    Nombre de usuario: <b>{{User.username}}</b><br>
+    Email: <b>{{User.email}}</b><br>
+
+</li>
+    
+
+{% endfor %}    
+</ul>
+{% else %}
+<center>
+<h3>El usuario no se encuentra en la base de datos.</h3>
+</center>
+{% endif %}    
+
+
+<br>
+<br>
+<center><button class="btn btn-outline-dark" ><a class="link" href="{% url 'vistaSuperUser' %}">Volver</a></button></center>
+<br>
+
+{% endblock %}
+
+

@@ -2,11 +2,11 @@
 from django.urls import path
 
 # Vistas generales
-from GameTimeApp.views import contacto, index, us, login_request, registro, buscarUsuario, buscarUsuarioResultados, UsuariosList, vistaSuperUser
+from GameTimeApp.views import contacto, eventCreate, index, us, login_request, registro, buscarUsuario, UsuariosList, vistaSuperUser
 from django.contrib.auth.views import LogoutView
 from GameTimeApp.views import editarPerfil
 # Vistas eventos
-from GameTimeApp.views import EventList, EventCreation, EventUpdate, EventDelete, EventList, EventCreation, EventUpdate, EventDelete, buscarEvento, buscarEventoResultados, EventDetail
+from GameTimeApp.views import eventCreate, eventList, buscarEvento, buscarEventoResultados
 # Vistas juegos
 from GameTimeApp.views import toro, reloj, inflables
 # Vistas FAq
@@ -22,23 +22,16 @@ urlpatterns = [
     path('login/', login_request, name='login'),
     path('logout/', LogoutView.as_view(template_name='GameTimeApp/logout.html'), name='logout'),
     path('buscarUsuario/', buscarUsuario, name='buscarUsuario'),
-    path('buscarUsuarioResultados', buscarUsuarioResultados, name='buscarUsuarioResultados'),
     path('UsuariosList/', UsuariosList, name='UsuariosList'),
     path('editarPerfil/', editarPerfil, name='editarPerfil'),
     path('vistaSuperUser/', vistaSuperUser, name='vistaSuperUser'),
     
 
     #EVENTS
-    path('events/create/', EventCreation.as_view(), name='events_create'),
-    path('events/update/<pk>/', EventUpdate.as_view(), name='events_update'),
-    path('events/delete/<pk>/', EventDelete.as_view(), name='events_delete'),
-    path('events/', EventList.as_view(), name='eventos'),
+    
+    path('events/', eventList, name='eventos'),
     path('events/buscar/', buscarEvento, name='buscar_eventos'),
     path('events/buscar/resultados', buscarEventoResultados, name='buscar_eventos_resultados'),
-    path('eventDetail', EventDetail.as_view(), name= 'EventDetail'),
-    
-    path('eventDetail', EventDetail.as_view(), name= 'EventDetail'),
-    path('eventDetail', EventDetail.as_view(), name= 'EventDetail'),
     #GAMES
     path('toro/', toro, name="toro"),
     path('reloj/', reloj, name="reloj"),

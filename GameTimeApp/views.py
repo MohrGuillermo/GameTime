@@ -8,7 +8,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from GameTimeApp.forms import UserRegistrationForm, UserEditForm
+from GameTimeApp.forms import UserRegistrationForm, UserEditForm, EventCreation
 from GameTimeApp.models import Faq, Event, Game, Contact
 
 from django.core.mail import send_mail
@@ -93,43 +93,40 @@ def login_request(request):
 
 
 
-@login_required
-def buscarUsuario(request):
-    return render(request, 'GameTimeApp/buscarUsuario.html')
+# @login_required
+# def buscarUsuario(request):
+#     return render(request, 'GameTimeApp/buscarUsuario.html')
 
 @login_required
-def buscarUsuarioResultados(request):
-    if request.GET == 'POST':
-        nombre = request.POST['nombre']
-        usuarios = User.objects.filter(username=nombre)
-        return render(request, 'GameTimeApp/buscarUsuarioResultados.html', {'usuarios': usuarios}, {'nombre': nombre})
+def buscarUsuario(request): 
+    if request.GET['username']:
+        username = request.GET['username']
+        usuarios = User.objects.filter(username=username)
+        return render(request, 'GameTimeApp/buscarUsuario.html', {'username':username, 'usuarios':usuarios}) 
     else:
-        return render(request, 'GameTimeApp/buscarUsuario.html', {'error': 'No hay usuarios con ese nombre'})
-
-
+        respuesta = 'No hay usuarios con ese nombre'
+        return render(request, 'GameTimeApp/buscarUsuario.html', {'respuesta':respuesta})
 
 # Events
-class EventList(ListView):
-    model = Event
-    template_name = 'GameTimeApp/eventList.html'
-class EventDetail(DetailView):
-    model = Event
-    template_name = 'GameTimeApp/eventDetail.html'
-class EventCreation(CreateView):
-    model = Event
-    fields = ['nombre', 'fecha', 'ubicacion', 'descripcion']
-    template_name = 'GameTimeApp/eventForm.html'
-    success_url = reverse_lazy('GameTimeApp/eventList.html')
-class EventUpdate(UpdateView):
-    model = Event
-    fields = ['nombre', 'fecha', 'descripcion']
-    template_name = 'GameTimeApp/eventForm.html'
-    success_url = reverse_lazy('GameTimeApp/eventList.html')
+def eventList(request):
+    eventos = Event.objects.all
+    return render(request, 'GameTimeApp/eventList.html', {'enventos':eventos})
 
-class EventDelete(DeleteView):
-    model = Event
-    template_name = 'GameTimeApp/eventDelete.html'
-    success_url = reverse_lazy('GameTimeApp/eventList.html')
+def eventCreate(request):
+    if request.method == 'POST':
+        miFormulario = EventCreation(request.POST)
+        if miFormulario.is_valid():
+            informacion = miFormulario.cleaned_data
+            nombre = informacion['nombre']
+            apellido = informacion['apellido']
+            fecha = informacion['fecha']
+            descripcion = informacion['descripcion']
+            evento = Event(nombre=nombre, apellido=apellido, fecha=fecha, descripcion=descripcion)
+            evento.save()
+            return render(request, 'GameTimeApp/eventList.html')
+    else:
+        miFormulario = EventCreation()
+        return render(request, 'GameTimeApp/eventCreate.html', {'miFormulario':miFormulario})
 
 def buscarEvento(request):
     return render(request, 'GameTimeApp/buscarEvento.html')
