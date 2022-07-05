@@ -1,1 +1,34 @@
-<h1>Registro</h1>
+{% extends "GameTimeApp/padre.html" %}
+{% load static %}
+
+{% block title %}
+<title>Game Time Eventos</title>
+{% endblock %}
+{% block tituloheader %}
+                    <h1 class="display-4 fw-bolder">Registro</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">Por favor ingrese los datos del nuevo usuario</p>
+{% endblock %}
+{% block productos %}
+<center>
+<br>
+<br>
+    
+<form action="" method="POST">
+
+    {% csrf_token %}
+    {{form.as_p}}
+    
+    <button type="submit">Registro</button>
+    
+    </form>
+    
+    
+    
+<br>
+<br>
+<center><button class="btn btn-outline-dark" ><a class="link" href="{% url 'vistaSuperUser' %}">Volver</a></button></center>
+<br>
+</center>
+{% endblock %}
+
+

@@ -1,1 +1,33 @@
-<h1>Log in</h1>
+{% extends "GameTimeApp/padre.html" %}
+{% load static %}
+
+{% block title %}
+<title>Game Time Eventos</title>
+{% endblock %}
+{% block tituloheader %}
+                    <h1 class="display-4 fw-bolder">Login</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">Por favor ingrese sus datos de usuario</p>
+{% endblock %}
+{% block productos %}
+<br>
+<br>
+<br>
+<center>
+<form action="" method="POST">
+
+    {% csrf_token %}
+    {{form.as_p}}
+    
+    <button type="submit">Iniciar sesion</button>
+    
+    </form>
+<br>
+<br>
+<br>
+    <p>Si desea formar parte del equipo de desarrollo de Game Time no dude en <a class="link" href="{% url 'contacto' %}">contactarse</a></p>
+</center>
+{% endblock %}
+
+
+
+    

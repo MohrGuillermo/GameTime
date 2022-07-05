@@ -1,0 +1,39 @@
+{% extends "GameTimeApp/padre.html" %}
+{% load static %}
+
+{% block title %}
+<title>Game Time Eventos</title>
+{% endblock %}
+{% block tituloheader %}
+                    <h1 class="display-4 fw-bolder">Desarrolladores</h1>
+                    <p class="lead fw-normal text-white-50 mb-0"></p>
+{% endblock %}
+{% block productos %}
+<center>
+    <br>
+    <h3>Secciones para desarrolladores</h3>
+</center>
+<br><br>
+<h2>Buscar un usuario</h2>
+<br>
+<form action="{% url 'buscarUsuario' %}" method="GET">
+    <input type="text" name="username" placeholder="Nombre del usuario" id="username">
+    <input type="submit" value="Buscar">
+</form>
+<br><br>
+<ul>
+    <p>Usuarios</p>
+    <button class="btn btn-outline-dark" ><a class="link" href="{% url 'registro' %}">Registrar un nuevo usuario</a></button><br><br>
+    <button class="btn btn-outline-dark" ><a class="link" href="{% url 'editarPerfil' %}">Editar perfil de usuario</a></button><br><br>
+    <button class="btn btn-outline-dark" ><a class="link" href="{% url 'UsuariosList' %}">Lista de usuarios registrados</a></button><br><br><br>
+    <p>Preguntas frecuentes</p>
+    <button class="btn btn-outline-dark" ><a class="link" href="{% url 'faq_List' %}">Lista de preguntas frecuentes</a></button><br><br>
+    <button class="btn btn-outline-dark" ><a class="link" href="{% url 'faq_Create' %}">Crear una pregunta frecuente</a></button><br><br><br>
+
+    <center>
+        <button class="btn btn-outline-dark" ><a class="link" href="{% url 'login' %}">Login</a></button>
+        <button class="btn btn-outline-dark" ><a class="link" href="{% url 'logout' %}">Logout</a></button><br>    
+    </center>
+
+</ul>
+{% endblock %}

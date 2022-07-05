@@ -2,15 +2,13 @@
 from django.urls import path
 
 # Vistas generales
-from GameTimeApp.views import contacto, index, us, login, registro, buscarUsuario, buscarUsuarioResultados
+from GameTimeApp.views import contacto, index, us, login_request, registro, buscarUsuario, UsuariosList, vistaSuperUser
 from django.contrib.auth.views import LogoutView
-from GameTimeApp.views import profile_edit
-# Vistas eventos
-from GameTimeApp.views import EventList, EventCreation, EventUpdate, EventDelete, EventList, EventCreation, EventUpdate, EventDelete, buscarEvento, buscarEventoResultados, EventDetail
+from GameTimeApp.views import editarPerfil
 # Vistas juegos
 from GameTimeApp.views import toro, reloj, inflables
 # Vistas FAq
-from GameTimeApp.views import FaqList, FaqCreation, FaqAnswer, FaqDelete
+from GameTimeApp.views import FaqList, FaqCreation
 
 urlpatterns = [
     # Paths generales
@@ -19,31 +17,18 @@ urlpatterns = [
     path('contacto/', contacto, name='contacto'),
     # Paths de logueo    
     path('registro/', registro, name='registro'),
-    path('login/', login, name='login'),
+    path('login/', login_request, name='login'),
     path('logout/', LogoutView.as_view(template_name='GameTimeApp/logout.html'), name='logout'),
     path('buscarUsuario/', buscarUsuario, name='buscarUsuario'),
-    path('buscarUsuarioResultados', buscarUsuarioResultados, name='buscarUsuarioResultados'),
-    path('editarPerfil/', profile_edit, name='editarPerfil'),
-    #EVENTS
-    path('events/create/', EventCreation.as_view(), name='events_create'),
-    path('events/update/<pk>/', EventUpdate.as_view(), name='events_update'),
-    path('events/delete/<pk>/', EventDelete.as_view(), name='events_delete'),
-    path('events/', EventList.as_view(), name='eventos'),
-    path('events/buscar/', buscarEvento, name='buscar_eventos'),
-    path('events/buscar/resultados', buscarEventoResultados, name='buscar_eventos_resultados'),
-    path('eventDetail', EventDetail.as_view(), name= 'EventDetail'),
-    
-    path('eventDetail', EventDetail.as_view(), name= 'EventDetail'),
-    path('eventDetail', EventDetail.as_view(), name= 'EventDetail'),
+    path('UsuariosList/', UsuariosList, name='UsuariosList'),
+    path('editarPerfil/', editarPerfil, name='editarPerfil'),
+    path('vistaSuperUser/', vistaSuperUser, name='vistaSuperUser'),
     #GAMES
     path('toro/', toro, name="toro"),
     path('reloj/', reloj, name="reloj"),
     path('inflables/', inflables, name="inflables"),
     #FAq'S
-    path('faqList/', FaqList.as_view(), name= 'faqList'),
-    path('faq/create/', FaqCreation.as_view(), name='faq_create'),
-    path('faq/update/<pk>/', FaqAnswer.as_view(), name='faq_update'),
-    path('faq/delete/<pk>/', FaqDelete.as_view(), name='faq_delete'),
-    # path('buscarFaqResultados/', buscarFaqResultados, name='buscarFaqResultados'),
+    path('faqList/', FaqList.as_view(), name= 'faq_List'),
+    path('faq/create/', FaqCreation.as_view(), name='faq_Create'),
     
 ]
