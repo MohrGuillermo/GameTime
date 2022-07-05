@@ -5,8 +5,6 @@ from django.urls import path
 from GameTimeApp.views import contacto, index, us, login_request, registro, buscarUsuario, UsuariosList, vistaSuperUser
 from django.contrib.auth.views import LogoutView
 from GameTimeApp.views import editarPerfil
-# Vistas eventos
-from GameTimeApp.views import eventList, buscarEvento, buscarEventoResultados
 # Vistas juegos
 from GameTimeApp.views import toro, reloj, inflables
 # Vistas FAq
@@ -25,13 +23,6 @@ urlpatterns = [
     path('UsuariosList/', UsuariosList, name='UsuariosList'),
     path('editarPerfil/', editarPerfil, name='editarPerfil'),
     path('vistaSuperUser/', vistaSuperUser, name='vistaSuperUser'),
-    
-
-    #EVENTS
-    
-    path('events/', eventList, name='eventos'),
-    path('events/buscar/', buscarEvento, name='buscar_eventos'),
-    path('events/buscar/resultados', buscarEventoResultados, name='buscar_eventos_resultados'),
     #GAMES
     path('toro/', toro, name="toro"),
     path('reloj/', reloj, name="reloj"),

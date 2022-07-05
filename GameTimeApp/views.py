@@ -8,8 +8,8 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from GameTimeApp.forms import UserRegistrationForm, UserEditForm, EventCreation
-from GameTimeApp.models import Faq, Event, Game, Contact
+from GameTimeApp.forms import UserRegistrationForm, UserEditForm, EventForm
+from GameTimeApp.models import Faq, Event
 
 from django.core.mail import send_mail
 from django.conf import settings
@@ -102,37 +102,7 @@ def buscarUsuario(request):
         respuesta = 'No hay usuarios con ese nombre'
         return render(request, 'GameTimeApp/buscarUsuario.html', {'respuesta':respuesta})
 
-# Events
-def eventList(request):
-    eventos = Event.objects.all
-    return render(request, 'GameTimeApp/eventList.html', {'enventos':eventos})
 
-def eventCreate(request):
-    if request.method == 'POST':
-        miFormulario = EventCreation(request.POST)
-        if miFormulario.is_valid():
-            informacion = miFormulario.cleaned_data
-            nombre = informacion['nombre']
-            apellido = informacion['apellido']
-            fecha = informacion['fecha']
-            descripcion = informacion['descripcion']
-            evento = Event(nombre=nombre, apellido=apellido, fecha=fecha, descripcion=descripcion)
-            evento.save()
-            return render(request, 'GameTimeApp/eventList.html')
-    else:
-        miFormulario = EventCreation()
-        return render(request, 'GameTimeApp/eventCreate.html', {'miFormulario':miFormulario})
-
-def buscarEvento(request):
-    return render(request, 'GameTimeApp/buscarEvento.html')
-
-def buscarEventoResultados(request):
-    if request.GET == 'POST':
-        fecha = request.POST['fecha']
-        eventos = Event.objects.filter(fecha=fecha)
-        return render(request, 'GameTimeApp/buscarEventoResultados.html', {'eventos': eventos}, {'fecha': fecha})
-    else:
-        return render(request, 'GameTimeApp/buscarEvento.html', {'error': 'No hay eventos programados en esa fecha'})
 
 #FAQ
 class FaqList(ListView):

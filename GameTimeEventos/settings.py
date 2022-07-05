@@ -55,7 +55,7 @@ ROOT_URLCONF = 'GameTimeEventos.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [r'/home/lozano/Documents/coderHouse/python/GameTime/GameTimeApp/Templates/'],
+        'DIRS': [r'C:\Users\mohrg\Desktop\CURSO CODER COMPLETO (PYTHON)\Trabajos Django\GameTime\GameTimeApp\Templates\GameTimeApp'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -112,7 +112,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-LOGIN_URL = 'GameTimeApp/login'
+LOGIN_URL = 'C:/Users/mohrg/Desktop/CURSO CODER COMPLETO (PYTHON)/Trabajos Django/GameTime/GameTimeApp/Templates/GameTimeApp/login.html'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
