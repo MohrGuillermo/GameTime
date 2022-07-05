@@ -1,3 +1,6 @@
+Link a video de presentación
+https://drive.google.com/file/d/135Oim_D2nSgAwH5hc9zwHOEYtk8zoI5P/view?usp=sharing
+
 Proyecto Game Time
 Desarrolladores:
 Mohr Guillermo - Gustavo Martinez Lozano
