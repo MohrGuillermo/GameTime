@@ -67,7 +67,7 @@ def registro(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            return render(request, 'GameTimeApp/register.html', {'mensaje': f'Usuario creado: {username}'})
+            return render(request, 'GameTimeApp/UsuariosList.html', {'mensaje': f'Usuario creado: {username}'})
         else:
             return render(request, 'GameTimeApp/register.html', {'form': form, 'mensaje': 'El usuario ya existe o los datos ingresados son incorrectos'})
     else:
@@ -105,13 +105,13 @@ def buscarUsuario(request):
 #FAQ
 class FaqList(ListView):
     model = Faq
-    template_name = 'GameTimeApp/faqList.html'
+    template_name = 'GameTimeApp/faq_List.html'
 
 class FaqCreation(CreateView):
     model = Faq
     fields = ['pregunta', 'respuesta']
     template_name = 'GameTimeApp/faqForm.html'
-    success_url = reverse_lazy('faqList')
+    success_url = reverse_lazy('faq_List')
 
 
 #games
