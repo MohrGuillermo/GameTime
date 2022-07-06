@@ -28,7 +28,7 @@ urlpatterns = [
     path('reloj/', reloj, name="reloj"),
     path('inflables/', inflables, name="inflables"),
     #FAq'S
-    path('faqList/', FaqList.as_view(), name= 'faq_List'),
+    path('faq_List/', FaqList.as_view(), name= 'faq_List'),
     path('faq/create/', FaqCreation.as_view(), name='faq_Create'),
     
 ]
